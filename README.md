@@ -1,2 +1,1 @@
-# D-optima
-D-optimality criterion
+Fish - find determinant of Xt*W*X matrix for purpose point
