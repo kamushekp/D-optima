@@ -7,3 +7,5 @@ def d_x(purpose,design,dot,p,h,kernel):
     d_x=np.dot(f_x.T,D)
     d_x=np.dot(d_x,f_x)
     return d_x
+    
+d_x(0,[-1,1],1,1,1,'unif')

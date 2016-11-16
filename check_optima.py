@@ -21,11 +21,13 @@ p=3,h=1,kernel='gauss')
 
 print(cond2)
 
-x_axe=[0+i*0.005 for i in range(200)]
+x_axe=[-0.3+i*0.005 for i in range(100)]
 y_axe=[0.5*d_x(purpose=0,design=[-1 ,  x_axe[i]],\
-dot=x_axe[i],p=1,h=1,kernel='unif')for i in range(200)]
+dot=x_axe[i],p=1,h=3,kernel='epanech')for i in range(200)]
 y_axe=list(map(lambda y:float(y),y_axe))
 
 import matplotlib.pyplot as plt
 plt.plot(x_axe,y_axe)
 plt.show()
+
+
