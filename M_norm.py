@@ -7,14 +7,14 @@ def get_f(purpose,x,p):
     return np.matrix([(x-purpose)**(j) for j in range(p+1)]).T
 
 
-def M(purpose,design,kernel,p,h):
+def M(purpose,design,weights,kernel,p,h):
     n=len(design)   
     M=np.zeros((p+1,p+1))
     Kui=[K((design[i]-purpose),mode=kernel)/h for i in range (n)]
     
     for i in range(n):
         f_x=get_f(purpose,design[i],p)
-        M+=Kui[i]*np.dot(f_x,f_x.T)
+        M+=Kui[i]*np.dot(f_x,f_x.T)*weights[i]
     return M
 
 def newdx(purpose,dot,kernel,p,h):
@@ -28,3 +28,5 @@ def newdx(purpose,dot,kernel,p,h):
     res=np.dot(f_x.T,D)
     res=np.dot(res,f_x)
     return res
+
+print(M(0,[-1,1],[0.5,0.5],'unif',1,1))
