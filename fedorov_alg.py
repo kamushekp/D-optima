@@ -20,8 +20,10 @@ def fed_alg(purpose,x0_design,kernel,p,h):
         return float(-w*d)
     sig_last=42
     sig=1
-    for i in  range(10):    
-        f=minimize(minimax,purpose,method='Nelder-Mead',\
+    for i in  range(50):  
+        a=np.random.randint(0,3)
+        print(a)
+        f=minimize(minimax,design.points[a],method='Nelder-Mead',\
         tol=1e-6,options={'maxiter': 1e+8, 'maxfev': 1e+8})
         sig=-f.fun-p-1
         alfa=sig/(sig+p)/(p+1)    
@@ -31,8 +33,10 @@ def fed_alg(purpose,x0_design,kernel,p,h):
     print(design.points)
     print(sum(design.weights))
     design.set_control(2,0.01)
+    design.set_control(2,0.01)
+    design.set_control(2,0.01)
     print(design.points)
     print(design.weights)
     print(sum(design.weights))
     '''написать функцию вычисления М матрицы для Федорова'''
-fed_alg(0,[-0,0.5],'epanech',1,1)
+fed_alg(0,[0,-0.75,0.75],'gauss',2,1)
