@@ -18,25 +18,40 @@ def fed_alg(purpose,x0_design,kernel,p,h):
         d=dx(purpose,design,dot,p,h,kernel)
         w=K((dot-purpose)/h,mode=kernel)/h
         return float(-w*d)
-    sig_last=42
+
     sig=1
-    for i in  range(50):  
-        a=np.random.randint(0,3)
-        print(a)
-        f=minimize(minimax,design.points[a],method='Nelder-Mead',\
+    for i in  range(700):  
+        a=np.random.rand()*(-1)**np.random.randint(1,3)
+        
+        f=minimize(minimax,a,method='Nelder-Mead',\
         tol=1e-6,options={'maxiter': 1e+8, 'maxfev': 1e+8})
         sig=-f.fun-p-1
-        alfa=sig/(sig+p)/(p+1)    
+        alfa=sig/(sig+p)/(p+1) 
+        print(alfa)
         design.anpcow(float(f.x),alfa)
-        sig_last=sig
+
         print ('iteration')
     print(design.points)
-    print(sum(design.weights))
+    print(design.weights)
     design.set_control(2,0.01)
     design.set_control(2,0.01)
-    design.set_control(2,0.01)
+    design.find_nonc(0.01)
     print(design.points)
     print(design.weights)
-    print(sum(design.weights))
-    '''написать функцию вычисления М матрицы для Федорова'''
-fed_alg(0,[0,-0.75,0.75],'gauss',2,1)
+    
+def draw_kernels():
+    x=np.arange(-2,2,0.00005)
+    g=[]
+    u=[]
+    e=[]
+    for i in range(len(x)):
+        g.append(K(x[i]))
+        u.append(K(x[i],'unif'))
+        e.append(K(x[i],'epanech'))
+        from matplotlib import pyplot as pl
+    
+    pl.plot(x,g,'--',x,u,'-.',x,e,':')
+    pl.axis([-2,2,0,1])
+    pl.show()
+draw_kernels()  
+#fed_alg(0,[0,0.1,-0.1,0.4],'epanech',3,1)

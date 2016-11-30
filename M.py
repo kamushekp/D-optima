@@ -17,14 +17,19 @@ def M(purpose,design,kernel,p,h):
         M+=Kui[i]*np.dot(f_x,f_x.T)
     return M
 
-def newdx(purpose,dot,kernel,p,h):
-    """count M for only one dot in design"""
-    M=np.zeros((p+1,p+1))
-    f_x=get_f(purpose,dot,p)
-    Kui=K((dot-purpose),mode=kernel)/h
-    M+=Kui*np.dot(f_x,f_x.T)
-    print(M)
-    D=np.linalg.inv(M)
-    res=np.dot(f_x.T,D)
-    res=np.dot(res,f_x)
-    return res
+def plot_M(purpose,kernel,p,h):
+    x=np.arange(-2,2,0.00005)
+    y=[]
+    for i in range(len(x)):
+        res=M(purpose,[-1,x[i]],kernel,p,h)
+        res=np.linalg.det(res)
+        y.append(res)
+        from matplotlib import pyplot as pl
+    print(len(x))
+    print(len(y))
+    pl.plot(x,y,'.')
+    pl.show()
+
+#plot_M(purpose=0,kernel='gauss',p=1,h=1)
+
+        

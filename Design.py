@@ -21,9 +21,18 @@ class Design:
       
     def find_nonc(self,percent):
         '''finding and delete points with small weights; doing redistrib.'''
+        cpyw=[]        
+        cpyp=[]  
+        for i in range(self.len):
+            if self.weights[i]>percent:
+                cpyw.append(self.weights[i])                
+                cpyp.append(self.points[i])
         for i in range(self.len):
             if self.weights[i]<percent:
-                self.delete_elem(i)
+                cpyw=list(map(lambda x:x+self.weights[i]/len(cpyw),cpyw))
+        self.weights=cpyw
+        self.points=cpyp
+        self.len=len(cpyp)
             
     def set_control(self,length,percent):
         '''if |x1-x2|<length*percent,x2 become x1 and x2 s weight doubled'''
