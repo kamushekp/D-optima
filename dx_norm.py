@@ -20,8 +20,6 @@ def plot_wd(k):
     j=-1
     for i in range(len(x)):
         j+=1
-        print(i)
-        print(len(x))
         des=Temp_design([1,0,x[j]])
         try:
             numb=float(d_x(purpose=0,design=des,dot=x[j]\
@@ -31,8 +29,7 @@ def plot_wd(k):
         except np.linalg.LinAlgError:
             x=np.delete(x,j)
             j-=1
-    
-    print(len(y)-len(x))
+
     from matplotlib import pyplot as pl
     pl.plot(x,y,'.')
     pl.show()

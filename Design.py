@@ -59,7 +59,6 @@ class Design:
             extra.append(extra_i)
             
             
-        print(extra)
         what_to_del=[]
         b=[]
         #print(extra)
@@ -81,6 +80,5 @@ class Design:
             self.weights.pop(elem)
             self.points.pop(elem)
             self.len-=1
-        print(a)
-        print(sum(b))
+
             
