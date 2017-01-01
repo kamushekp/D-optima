@@ -8,6 +8,9 @@ def find_best_design(purpose,x0,p,h,kernel,symm):
     other side of purpose point.
     symm-flag that equal 1 when design has= odd number of points.
     remember, that symm=1 add one more point to design"""
+    '''if len(x0)*2<p+1:
+        raise NameError('Not enought dots')
+    '''
     def count_finite_det(design):
         res=0
         for point in purpose:
@@ -28,4 +31,7 @@ def find_best_design(purpose,x0,p,h,kernel,symm):
     print('NelMead')
     print (res)
             
-find_best_design(purpose=[0],x0=[0.1,0.2],p=4,h=1,kernel='gauss',symm=1)
+find_best_design(purpose=[0],x0=[0.29, 0.5, 0.3,0.5,0.99],p=10,h=1,kernel='unif',symm=1)
+a=np.linalg.det(M(0,[0.29, 0.5, 0.94,0.78,0.99],'unif',10,1,1))
+print(a)
+

@@ -1,7 +1,7 @@
 import numpy as np
 from kernel import kernel as K
 from M import M
-def check_all(purpose,design,p,h,kernel):
+'''def check_all(purpose,design,p,h,kernel):
     
     def check_one(purpose,design,dot,p,h,kernel):
         d=d_x(purpose,design,dot,p,h,kernel)
@@ -18,7 +18,7 @@ def check_all(purpose,design,p,h,kernel):
 #cond2=check_all(purpose=0,design=[-1,  0, 1],p=2,h=1,kernel='gauss')
 
 #print(cond2)
-
+'''
 
 
 def d_x(purpose,design,dot,p,h,kernel):
@@ -32,11 +32,11 @@ def d_x(purpose,design,dot,p,h,kernel):
     return float(d_x)
 
 h=1  
-kernl='epanech'  
+kernl='unif'  
 x_axe=np.linspace(-1,1,500)
 
-y_axe=[K(x_axe[i]/h,mode=kernl)/h*d_x(purpose=0,design=[-2/3,2/3],\
-dot=x_axe[i],p=1,h=h,kernel=kernl)for i in range(len(x_axe))]
+y_axe=[K(x_axe[i]/h,mode=kernl)/h*d_x(purpose=0,design=[-0.999,0.8356540663993193, 0.5641572515850596,-0.564263395062234, 0.7821410588028485,0.2955600789475211,-0.29399672797215587,0.0005596857669483513,0.9376458913026472,-0.93614466888028,-0.7889649466036868,0.9999999983452569],\
+dot=x_axe[i],p=10,h=h,kernel=kernl)for i in range(len(x_axe))]
 y_axe=list(map(lambda y:float(y),y_axe))
 
 import matplotlib.pyplot as plt

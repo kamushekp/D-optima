@@ -20,7 +20,7 @@ def plot_wd(k):
     j=-1
     for i in range(len(x)):
         j+=1
-        des=Temp_design([1,0,x[j]])
+        des=Temp_design([1,0,1,x[j]])
         try:
             numb=float(d_x(purpose=0,design=des,dot=x[j]\
             ,p=2,h=1,kernel=k))
