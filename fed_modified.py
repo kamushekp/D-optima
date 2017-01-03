@@ -12,7 +12,7 @@ def del_repeated(des,weits):
     des=list(enumerate(des))
     for elem in des:
         if elem[0] not in thing_was_count:
-            rep=filter(lambda x:abs(x[1]-elem[1])<presition,des)    
+            rep=filter(lambda x:abs(x[1]-elem[1])<1e-4,des)    
             rep=list(rep)
             things=set([x[0]for x in rep])
             if not things&thing_was_count:
@@ -40,13 +40,17 @@ def alg(purpose,x0,kernel,p,h):
     
     
     flag=[0,1][p%2==0]
+    weits=[(0.5)/len(x0)]*len(x0)#weights of points in x0
+    right=[1]
+    i=0
+    err=1
+    x=[0]*int((p+1)/2)
+    while err>1e+3:
 
-    weits=[0.5/len(x0)]*len(x0)#weights of points in x0
-    for i in range(10):
+        i+=1
         m=M_fed_style(purpose,x0,kernel,p,h,flag,weits)
         D=np.linalg.inv(m)
-        minimax(-0.9999)
-        strt=2*h*np.random.random_sample()+purpose-h
+        strt=4*h*np.random.random_sample()+purpose
         f=minimize(minimax,strt,method='Nelder-Mead',\
         tol=presition,options={'maxiter': 1e+8, 'maxfev': 1e+8})
         alfa=-f.fun-p-1
@@ -55,10 +59,16 @@ def alg(purpose,x0,kernel,p,h):
         weits=list(map(lambda w:w*(1-alfa),weits))
         weits.append(alfa/2)
         x0.append(float(f.x))
-    x0,weits=del_repeated(x0,weits)      
+        x0,weits=del_repeated(x0,weits)      
         
-    print(x0)
-    print(sum(weits))
+        answer=zip(x0,weits)
+        answer=sorted(answer,key=lambda x:x[1])[::-1]
+        x,y=zip(*answer[:int((p+1)/2):])
+        x=sorted(list(map(lambda x:round(x,2),x)))
+        print("{0},     {1}".format(i,x))      
+        err=sum(list([(b-y)**2 for b,y in zip(right,x)]))
+        print(err)
 
 
-alg(0,[0.5,0.1],'unif',1,1)
+
+alg(0,[0.1,1.5,2.3],'gauss',5,1)
