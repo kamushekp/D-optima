@@ -14,7 +14,7 @@ def M(purpose,design,kernel,p,h):
     
     for i in range(n):
         f_x=get_f(purpose,design[i],p)
-        M+=Kui[i]*np.dot(f_x,f_x.T)
+        M+=Kui[i]*np.dot(f_x,f_x.T)/len(design)
     return M
 
 def plot_M(purpose,kernel,p,h):
@@ -31,5 +31,5 @@ def plot_M(purpose,kernel,p,h):
     pl.show()
 
 #plot_M(purpose=0,kernel='gauss',p=1,h=1)
-print(M(-1,[-10,-6,4,8,-4,-2,0,2,-1],'epanech',3,10))
+#print(M(-1,[-10,-6,4,8,-4,-2,0,2,-1],'epanech',3,10))
         

@@ -10,6 +10,6 @@ def kernel(u,mode='gauss',gama=0):
                     abs(u)<=1:(1-u*u)**gama/special.beta\
                     (0.5,gama+1)}[True]
     elif mode=='unif':
-        return {abs(u)>1+1e-14:0,abs(u)<=1+1e-14:0.5}[True]
+        return {abs(u)>1:0,abs(u)<=1:0.5}[True]
 
 

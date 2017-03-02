@@ -38,7 +38,3 @@ x_axe=np.linspace(-1,1,500)
 y_axe=[K(x_axe[i]/h,mode=kernl)/h*d_x(purpose=0,design=[-0.999,0.8356540663993193, 0.5641572515850596,-0.564263395062234, 0.7821410588028485,0.2955600789475211,-0.29399672797215587,0.0005596857669483513,0.9376458913026472,-0.93614466888028,-0.7889649466036868,0.9999999983452569],\
 dot=x_axe[i],p=10,h=h,kernel=kernl)for i in range(len(x_axe))]
 y_axe=list(map(lambda y:float(y),y_axe))
-
-import matplotlib.pyplot as plt
-plt.plot(x_axe,y_axe,'.')
-plt.show()

@@ -22,7 +22,7 @@ def fed_alg(purpose,x0_design,kernel,p,h):
         a=np.random.rand()*(-1)**np.random.randint(1,3)
         
         f=minimize(minimax,a,method='Nelder-Mead',\
-        tol=1e-6,options={'maxiter': 1e+8, 'maxfev': 1e+8})
+        tol=1e-2,options={'maxiter': 1e+8, 'maxfev': 1e+8})
         sig=-f.fun-p-1#???????????
         alfa=sig/(sig+p)/(p+1) 
         print(alfa)
